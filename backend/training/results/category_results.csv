@@ -1,0 +1,4 @@
+model,accuracy,precision,recall,f1
+Naive Bayes,99.50%,99.51%,99.50%,99.49%
+Logistic Regression,99.50%,99.51%,99.50%,99.49%
+SVM (LinearSVC),99.50%,99.51%,99.50%,99.49%

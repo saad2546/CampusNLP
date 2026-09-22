@@ -1,0 +1,58 @@
+# ============================================================
+#  APSIT Complaint Analyzer — .gitignore
+# ============================================================
+
+# ── SECRETS — NEVER COMMIT THESE ────────────────────────────
+backend/serviceAccountKey.json
+backend/.env
+.env
+*.pem
+*.key
+
+# ── Python virtual environment ───────────────────────────────
+backend/venv/
+venv/
+env/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# ── ML Models (large binary files — regenerated via setup.py) 
+backend/ml_models/*.pkl
+backend/ml_models/*.joblib
+
+# ── Generated datasets (regenerated via setup.py) ────────────
+backend/datasets/*.csv
+
+# ── Training output charts ───────────────────────────────────
+backend/training/results/*.png
+backend/training/results/*.jpg
+
+# ── Node.js ──────────────────────────────────────────────────
+frontend/node_modules/
+node_modules/
+frontend/dist/
+dist/
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+
+# ── OS files ─────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE / Editor ─────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Logs ─────────────────────────────────────────────────────
+*.log
+npm-debug.log*
