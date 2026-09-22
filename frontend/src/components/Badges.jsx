@@ -8,7 +8,12 @@ export function StatusBadge({ status }) {
     'Resolved':     'badge-resolved',
     'Rejected':     'badge-rejected',
   };
-  return <span className={`badge ${map[status] || 'badge-pending'}`}>{status}</span>;
+  return (
+    <span className={`badge ${map[status] || 'badge-pending'}`}>
+      <span className="badge-dot" />
+      {status}
+    </span>
+  );
 }
 
 /* Priority badge */
@@ -19,7 +24,12 @@ export function PriorityBadge({ priority }) {
     Medium:   'badge-medium',
     Low:      'badge-low',
   };
-  return <span className={`badge ${map[priority] || 'badge-low'}`}>{priority}</span>;
+  return (
+    <span className={`badge ${map[priority] || 'badge-low'}`}>
+      {priority === 'Critical' && '⚡ '}
+      {priority}
+    </span>
+  );
 }
 
 /* Sentiment badge */
@@ -32,7 +42,8 @@ export function SentimentBadge({ sentiment }) {
   const emoji = { Positive: '😊', Neutral: '😐', Negative: '😞' };
   return (
     <span className={`badge ${map[sentiment] || 'badge-neutral'}`}>
-      {emoji[sentiment]} {sentiment}
+      <span>{emoji[sentiment]}</span>
+      <span>{sentiment}</span>
     </span>
   );
 }

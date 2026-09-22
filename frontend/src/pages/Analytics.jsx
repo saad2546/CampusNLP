@@ -2,16 +2,17 @@ import { useEffect, useState } from 'react';
 import { 
   PieChart, Pie, Cell, Tooltip, ResponsiveContainer, 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend,
-  LineChart, Line
+  LineChart, Line, AreaChart, Area
 } from 'recharts';
 import { 
   getCategories, getSentiment, getPriority, 
   getTrends, getResolution, getDepartments 
 } from '../services/api';
+import { Sparkles, PieChart as PieIcon, BarChart3, TrendingUp, CheckCircle, Brain } from 'lucide-react';
 
-const COLORS = ['#6366f1', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#3b82f6', '#ec4899', '#14b8a6', '#f97316', '#64748b'];
+const COLORS = ['#6366f1', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ec4899', '#3b82f6', '#14b8a6', '#f97316', '#a855f7'];
 const SENTIMENT_COLORS = { 'Positive': '#10b981', 'Neutral': '#94a3b8', 'Negative': '#ef4444' };
-const PRIORITY_COLORS = { 'Critical': '#ef4444', 'High': '#f59e0b', 'Medium': '#3b82f6', 'Low': '#94a3b8' };
+const PRIORITY_COLORS = { 'Critical': '#ef4444', 'High': '#f59e0b', 'Medium': '#38bdf8', 'Low': '#94a3b8' };
 
 export function Analytics() {
   const [data, setData] = useState({
@@ -56,34 +57,52 @@ export function Analytics() {
   if (loading) return <div className="loading-overlay"><div className="spinner" /></div>;
 
   return (
-    <div className="animate-fade-in" style={{ paddingBottom: 40 }}>
-      <h1 className="page-title">Analytics</h1>
-      <p className="page-subtitle" style={{ marginBottom: 24 }}>
-        Data-driven insights from the NLP pipeline
-      </p>
+    <div className="animate-fade-in" style={{ paddingBottom: 50 }}>
+      {/* Top Banner */}
+      <div className="glass-card" style={{
+        padding: '30px 34px',
+        marginBottom: 32,
+        background: 'linear-gradient(135deg, rgba(20, 24, 50, 0.75) 0%, rgba(15, 17, 30, 0.85) 100%)',
+        border: '1px solid rgba(99, 102, 241, 0.25)',
+      }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 12px', borderRadius: 9999, background: 'rgba(99, 102, 241, 0.18)', border: '1px solid rgba(99, 102, 241, 0.35)', color: '#c7d2fe', fontSize: '0.78rem', fontWeight: 600, marginBottom: 10 }}>
+          <Brain size={14} color="#818cf8" /> Machine Learning Intelligence
+        </div>
+        <h1 className="page-title" style={{ fontSize: '2rem' }}>Analytics & NLP Distribution</h1>
+        <p className="page-subtitle" style={{ color: '#94a3b8' }}>
+          Data patterns derived from TF-IDF classification, VADER sentiment scoring, and operational resolution tracking.
+        </p>
+      </div>
 
-      {/* Top Stats */}
+      {/* Top Resolution KPIs */}
       {data.resolution && (
-        <div className="grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, marginBottom: 24 }}>
-          <div className="stat-card">
-            <div className="stat-number">{data.resolution.total}</div>
-            <div className="stat-label">Total Complaints</div>
+        <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20, marginBottom: 30 }}>
+          <div className="stat-card" style={{ '--glow-color': 'rgba(99, 102, 241, 0.2)' }}>
+            <div className="stat-label">Total Volume</div>
+            <div className="stat-number" style={{ marginTop: 12 }}>{data.resolution.total}</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 6 }}>All registered tickets</div>
           </div>
-          <div className="stat-card">
-            <div className="stat-number">{data.resolution.resolved}</div>
-            <div className="stat-label">Resolved Complaints</div>
+          <div className="stat-card" style={{ '--glow-color': 'rgba(16, 185, 129, 0.2)' }}>
+            <div className="stat-label">Resolved Tickets</div>
+            <div className="stat-number" style={{ marginTop: 12, color: '#34d399' }}>{data.resolution.resolved}</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 6 }}>Resolved campus grievances</div>
           </div>
-          <div className="stat-card">
-            <div className="stat-number">{data.resolution.resolution_rate}%</div>
-            <div className="stat-label">Resolution Rate</div>
+          <div className="stat-card" style={{ '--glow-color': 'rgba(6, 182, 212, 0.2)' }}>
+            <div className="stat-label">Resolution Efficiency</div>
+            <div className="stat-number" style={{ marginTop: 12, color: '#38bdf8' }}>{data.resolution.resolution_rate}%</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 6 }}>Resolution rate ratio</div>
           </div>
         </div>
       )}
 
-      <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 24, marginBottom: 24 }}>
+      {/* Primary Visualizations */}
+      <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: 24, marginBottom: 28 }}>
         {/* Category Pie */}
-        <div className="glass-card" style={{ padding: 20 }}>
-          <h3 style={{ marginBottom: 20, fontSize: '1.1rem' }}>Complaints by Category</h3>
+        <div className="glass-card" style={{ padding: '24px 26px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
+            <PieIcon size={18} color="#818cf8" />
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f8fafc' }}>Complaints by Category</h3>
+          </div>
           <div style={{ height: 300 }}>
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -93,16 +112,17 @@ export function Analytics() {
                   nameKey="category"
                   cx="50%"
                   cy="50%"
-                  outerRadius={100}
-                  fill="#8884d8"
-                  label={({ category, percent }) => `${category} ${(percent * 100).toFixed(0)}%`}
+                  outerRadius={105}
+                  innerRadius={50}
+                  paddingAngle={3}
+                  label={({ category, percent }) => `${category} (${(percent * 100).toFixed(0)}%)`}
                 >
                   {data.categories.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
                 <Tooltip 
-                  contentStyle={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
+                  contentStyle={{ background: '#121420', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff' }}
                   itemStyle={{ color: '#fff' }}
                 />
               </PieChart>
@@ -110,19 +130,25 @@ export function Analytics() {
           </div>
         </div>
 
-        {/* Priority Bar */}
-        <div className="glass-card" style={{ padding: 20 }}>
-          <h3 style={{ marginBottom: 20, fontSize: '1.1rem' }}>Priority Distribution</h3>
+        {/* Priority Bar Chart */}
+        <div className="glass-card" style={{ padding: '24px 26px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
+            <BarChart3 size={18} color="#fbbf24" />
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f8fafc' }}>Priority Distribution</h3>
+          </div>
           <div style={{ height: 300 }}>
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data.priority} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                <XAxis dataKey="priority" stroke="var(--text-secondary)" />
-                <YAxis stroke="var(--text-secondary)" />
-                <Tooltip cursor={{ fill: 'rgba(255,255,255,0.05)' }} contentStyle={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }} />
-                <Bar dataKey="count" radius={[4, 4, 0, 0]}>
+              <BarChart data={data.priority} margin={{ top: 20, right: 30, left: -10, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+                <XAxis dataKey="priority" stroke="var(--text-secondary)" tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                <YAxis stroke="var(--text-secondary)" tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                <Tooltip 
+                  cursor={{ fill: 'rgba(255,255,255,0.04)' }} 
+                  contentStyle={{ background: '#121420', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff' }} 
+                />
+                <Bar dataKey="count" radius={[6, 6, 0, 0]}>
                   {data.priority.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={PRIORITY_COLORS[entry.priority]} />
+                    <Cell key={`cell-${index}`} fill={PRIORITY_COLORS[entry.priority] || '#818cf8'} />
                   ))}
                 </Bar>
               </BarChart>
@@ -131,11 +157,14 @@ export function Analytics() {
         </div>
       </div>
 
-      <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 24 }}>
-        {/* Sentiment Donut */}
-        <div className="glass-card" style={{ padding: 20 }}>
-          <h3 style={{ marginBottom: 20, fontSize: '1.1rem' }}>Sentiment Analysis</h3>
-          <div style={{ height: 250 }}>
+      <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: 24 }}>
+        {/* Sentiment Analysis Donut */}
+        <div className="glass-card" style={{ padding: '24px 26px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
+            <Sparkles size={18} color="#34d399" />
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f8fafc' }}>Sentiment Polarity (VADER)</h3>
+          </div>
+          <div style={{ height: 260 }}>
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -144,34 +173,43 @@ export function Analytics() {
                   nameKey="sentiment"
                   cx="50%"
                   cy="50%"
-                  innerRadius={60}
-                  outerRadius={100}
-                  fill="#8884d8"
+                  innerRadius={65}
+                  outerRadius={95}
+                  paddingAngle={4}
                   label
                 >
                   {data.sentiment.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={SENTIMENT_COLORS[entry.sentiment]} />
+                    <Cell key={`cell-${index}`} fill={SENTIMENT_COLORS[entry.sentiment] || '#94a3b8'} />
                   ))}
                 </Pie>
-                <Tooltip contentStyle={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }} />
-                <Legend />
+                <Tooltip contentStyle={{ background: '#121420', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff' }} />
+                <Legend wrapperStyle={{ paddingTop: 10 }} />
               </PieChart>
             </ResponsiveContainer>
           </div>
         </div>
 
-        {/* Monthly Trends */}
-        <div className="glass-card" style={{ padding: 20 }}>
-          <h3 style={{ marginBottom: 20, fontSize: '1.1rem' }}>Complaint Trends</h3>
-          <div style={{ height: 250 }}>
+        {/* Temporal Trends */}
+        <div className="glass-card" style={{ padding: '24px 26px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
+            <TrendingUp size={18} color="#38bdf8" />
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f8fafc' }}>Submission Trends</h3>
+          </div>
+          <div style={{ height: 260 }}>
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={data.trends} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                <XAxis dataKey="month" stroke="var(--text-secondary)" />
-                <YAxis stroke="var(--text-secondary)" />
-                <Tooltip contentStyle={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }} />
-                <Line type="monotone" dataKey="count" stroke="var(--primary)" strokeWidth={3} dot={{ r: 5, fill: 'var(--primary)' }} />
-              </LineChart>
+              <AreaChart data={data.trends} margin={{ top: 20, right: 30, left: -10, bottom: 5 }}>
+                <defs>
+                  <linearGradient id="trendGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#6366f1" stopOpacity={0.4}/>
+                    <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+                <XAxis dataKey="month" stroke="var(--text-secondary)" tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                <YAxis stroke="var(--text-secondary)" tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                <Tooltip contentStyle={{ background: '#121420', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff' }} />
+                <Area type="monotone" dataKey="count" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#trendGradient)" />
+              </AreaChart>
             </ResponsiveContainer>
           </div>
         </div>
