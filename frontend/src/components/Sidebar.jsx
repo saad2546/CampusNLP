@@ -32,37 +32,36 @@ export function Sidebar() {
 
   return (
     <aside style={{
-      width: '260px',
-      minWidth: '260px',
+      width: '250px',
+      minWidth: '250px',
       height: '100vh',
       position: 'sticky',
       top: 0,
       display: 'flex',
       flexDirection: 'column',
-      background: 'linear-gradient(180deg, #0d0e17 0%, #090a10 100%)',
+      background: 'var(--bg-surface)',
       borderRight: '1px solid var(--border)',
-      padding: '24px 16px',
-      boxShadow: '4px 0 24px rgba(0, 0, 0, 0.25)',
+      padding: '22px 14px',
       zIndex: 10,
     }}>
       {/* Brand Header */}
-      <div style={{ padding: '4px 12px 28px' }}>
+      <div style={{ padding: '4px 10px 24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{
-            width: 38,
-            height: 38,
-            borderRadius: 10,
-            background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+            width: 34,
+            height: 34,
+            borderRadius: 8,
+            background: '#10b981',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 4px 15px rgba(99, 102, 241, 0.4)',
+            color: '#092116',
           }}>
-            <Sparkles size={20} color="#fff" />
+            <Sparkles size={18} strokeWidth={2.5} />
           </div>
           <div>
-            <div style={{ fontSize: '1.05rem', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.2 }} className="gradient-text">
-              APSIT NLP
+            <div style={{ fontSize: '1rem', fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#f3f4f6' }}>
+              APSIT Portal
             </div>
             <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 500 }}>
               Complaint Analyzer
@@ -72,16 +71,16 @@ export function Sidebar() {
       </div>
 
       {/* Nav Links */}
-      <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
         <div style={{ 
-          fontSize: '0.7rem', 
+          fontSize: '0.68rem', 
           fontWeight: 700, 
           color: 'var(--text-muted)', 
           textTransform: 'uppercase', 
           letterSpacing: '0.08em',
-          padding: '0 12px 6px',
+          padding: '0 10px 6px',
         }}>
-          Navigation
+          Menu
         </div>
 
         {links.map(({ to, icon: Icon, label }) => {
@@ -94,22 +93,19 @@ export function Sidebar() {
                 display:        'flex',
                 alignItems:     'center',
                 gap:            12,
-                padding:        '11px 16px',
+                padding:        '9px 14px',
                 borderRadius:   'var(--radius-md)',
-                fontSize:       '0.9rem',
+                fontSize:       '0.88rem',
                 fontWeight:     active ? 600 : 500,
                 color:          active ? '#ffffff' : 'var(--text-secondary)',
-                background:     active 
-                  ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.95), rgba(168, 85, 247, 0.9))' 
-                  : 'transparent',
-                boxShadow:      active ? '0 4px 20px rgba(99, 102, 241, 0.35)' : 'none',
-                border:         active ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid transparent',
+                background:     active ? '#242934' : 'transparent',
+                border:         active ? '1px solid #374151' : '1px solid transparent',
                 transition:     'var(--transition)',
                 textDecoration: 'none',
               }}
               onMouseEnter={e => { 
                 if (!active) {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
                   e.currentTarget.style.color = 'var(--text-primary)';
                 }
               }}
@@ -120,9 +116,9 @@ export function Sidebar() {
                 }
               }}
             >
-              <Icon size={18} strokeWidth={active ? 2.3 : 1.8} />
+              <Icon size={17} strokeWidth={active ? 2.2 : 1.8} color={active ? '#34d399' : 'currentColor'} />
               <span>{label}</span>
-              {active && <ChevronRight size={15} style={{ marginLeft: 'auto', opacity: 0.8 }} />}
+              {active && <ChevronRight size={14} style={{ marginLeft: 'auto', opacity: 0.6 }} />}
             </Link>
           );
         })}
@@ -130,31 +126,31 @@ export function Sidebar() {
 
       {/* User profile + Logout card */}
       <div style={{
-        background: 'rgba(255, 255, 255, 0.03)',
+        background: '#14161b',
         border: '1px solid var(--border)',
-        borderRadius: 'var(--radius-lg)',
-        padding: '14px',
+        borderRadius: 'var(--radius-md)',
+        padding: '12px 14px',
         marginTop: 16,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
           <div style={{
-            width: 36,
-            height: 36,
+            width: 32,
+            height: 32,
             borderRadius: '50%',
-            background: role === 'admin' ? 'rgba(168, 85, 247, 0.2)' : 'rgba(99, 102, 241, 0.2)',
-            border: role === 'admin' ? '1px solid rgba(168, 85, 247, 0.4)' : '1px solid rgba(99, 102, 241, 0.4)',
-            color: role === 'admin' ? '#c084fc' : '#818cf8',
+            background: role === 'admin' ? 'rgba(56, 189, 248, 0.15)' : 'rgba(16, 185, 129, 0.15)',
+            border: role === 'admin' ? '1px solid rgba(56, 189, 248, 0.3)' : '1px solid rgba(16, 185, 129, 0.3)',
+            color: role === 'admin' ? '#38bdf8' : '#34d399',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontWeight: 700,
-            fontSize: '0.85rem',
+            fontSize: '0.8rem',
           }}>
-            {role === 'admin' ? <Shield size={16} /> : displayName.charAt(0).toUpperCase()}
+            {role === 'admin' ? <Shield size={15} /> : displayName.charAt(0).toUpperCase()}
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ 
-              fontSize: '0.88rem', 
+              fontSize: '0.84rem', 
               fontWeight: 600, 
               color: 'var(--text-primary)', 
               overflow: 'hidden', 
@@ -164,13 +160,13 @@ export function Sidebar() {
               {displayName}
             </div>
             <div style={{ 
-              fontSize: '0.7rem', 
-              color: role === 'admin' ? '#c084fc' : '#818cf8', 
+              fontSize: '0.68rem', 
+              color: role === 'admin' ? '#38bdf8' : '#34d399', 
               fontWeight: 600, 
               textTransform: 'uppercase', 
-              letterSpacing: '0.06em' 
+              letterSpacing: '0.05em' 
             }}>
-              {role === 'admin' ? '👑 Admin' : '🎓 Student'}
+              {role === 'admin' ? 'Admin' : 'Student'}
             </div>
           </div>
         </div>
@@ -179,13 +175,13 @@ export function Sidebar() {
           onClick={handleLogout}
           className="btn btn-ghost w-full"
           style={{ 
-            padding: '8px 12px', 
-            fontSize: '0.8rem', 
+            padding: '7px 10px', 
+            fontSize: '0.78rem', 
             justifyContent: 'center',
             borderRadius: 'var(--radius-sm)'
           }}
         >
-          <LogOut size={14} />
+          <LogOut size={13} />
           Sign out
         </button>
       </div>

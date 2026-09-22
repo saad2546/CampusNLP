@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { getDashboard, getComplaints } from '../services/api';
 import { StatusBadge, PriorityBadge } from '../components/Badges';
 import { 
-  Users, FileText, CheckCircle2, AlertTriangle, Clock, 
-  ArrowRight, Shield, Sparkles, Filter 
+  FileText, CheckCircle2, AlertTriangle, Clock, 
+  ArrowRight, Shield, BarChart2 
 } from 'lucide-react';
 
 export function AdminDashboard() {
@@ -37,10 +37,8 @@ export function AdminDashboard() {
     <div className="animate-fade-in">
       {/* Top Welcome Header */}
       <div className="glass-card" style={{
-        padding: '30px 34px',
-        marginBottom: 32,
-        background: 'linear-gradient(135deg, rgba(30, 27, 75, 0.7) 0%, rgba(20, 16, 38, 0.85) 100%)',
-        border: '1px solid rgba(168, 85, 247, 0.25)',
+        padding: '28px 30px',
+        marginBottom: 28,
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -48,81 +46,81 @@ export function AdminDashboard() {
         gap: 16
       }}>
         <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 12px', borderRadius: 9999, background: 'rgba(168, 85, 247, 0.18)', border: '1px solid rgba(168, 85, 247, 0.35)', color: '#e9d5ff', fontSize: '0.78rem', fontWeight: 600, marginBottom: 10 }}>
-            <Shield size={14} color="#c084fc" /> Admin Oversight Console
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '3px 10px', borderRadius: 6, background: 'rgba(56, 189, 248, 0.1)', border: '1px solid rgba(56, 189, 248, 0.25)', color: '#38bdf8', fontSize: '0.74rem', fontWeight: 600, marginBottom: 8 }}>
+            <Shield size={13} /> Administrative Console
           </div>
-          <h1 className="page-title" style={{ fontSize: '2rem' }}>Administration Overview</h1>
-          <p className="page-subtitle" style={{ color: '#94a3b8' }}>
+          <h1 className="page-title" style={{ fontSize: '1.85rem' }}>Campus Overview</h1>
+          <p className="page-subtitle">
             Real-time status tracking, NLP automated triage, and complaint distribution metrics.
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: 12 }}>
+        <div style={{ display: 'flex', gap: 10 }}>
           <Link to="/admin/complaints" className="btn btn-primary" style={{ gap: 8 }}>
-            <FileText size={16} /> Manage Complaints
+            <FileText size={15} /> Complaints
           </Link>
           <Link to="/admin/analytics" className="btn btn-ghost" style={{ gap: 8 }}>
-            <Sparkles size={16} /> NLP Insights
+            <BarChart2 size={15} /> Analytics
           </Link>
         </div>
       </div>
 
-      {/* Modern Metrics Grid */}
-      <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20, marginBottom: 34 }}>
-        <div className="stat-card" style={{ '--glow-color': 'rgba(56, 189, 248, 0.2)' }}>
+      {/* Metrics Grid */}
+      <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 16, marginBottom: 28 }}>
+        <div className="stat-card">
           <div className="flex justify-between items-center">
             <div className="stat-label">Total Received</div>
-            <div className="stat-icon" style={{ background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8' }}>
-              <FileText size={22} />
+            <div className="stat-icon" style={{ background: 'rgba(255, 255, 255, 0.04)', color: '#9ca3af' }}>
+              <FileText size={18} />
             </div>
           </div>
-          <div className="stat-number" style={{ marginTop: 14 }}>{stats.total}</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 6 }}>All campus tickets</div>
+          <div className="stat-number" style={{ marginTop: 12 }}>{stats.total}</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 4 }}>All campus tickets</div>
         </div>
 
-        <div className="stat-card" style={{ '--glow-color': 'rgba(245, 158, 11, 0.2)' }}>
+        <div className="stat-card">
           <div className="flex justify-between items-center">
-            <div className="stat-label">Pending Triage</div>
-            <div className="stat-icon" style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24' }}>
-              <AlertTriangle size={22} />
+            <div className="stat-label">Pending Review</div>
+            <div className="stat-icon" style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#fbbf24' }}>
+              <AlertTriangle size={18} />
             </div>
           </div>
-          <div className="stat-number" style={{ marginTop: 14, color: '#fbbf24' }}>{stats.pending}</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 6 }}>Awaiting review</div>
+          <div className="stat-number" style={{ marginTop: 12, color: '#fbbf24' }}>{stats.pending}</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 4 }}>Awaiting review</div>
         </div>
 
-        <div className="stat-card" style={{ '--glow-color': 'rgba(168, 85, 247, 0.2)' }}>
+        <div className="stat-card">
           <div className="flex justify-between items-center">
             <div className="stat-label">In Progress</div>
-            <div className="stat-icon" style={{ background: 'rgba(168, 85, 247, 0.15)', color: '#c084fc' }}>
-              <Clock size={22} />
+            <div className="stat-icon" style={{ background: 'rgba(45, 212, 191, 0.1)', color: '#2dd4bf' }}>
+              <Clock size={18} />
             </div>
           </div>
-          <div className="stat-number" style={{ marginTop: 14, color: '#c084fc' }}>{stats.in_progress}</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 6 }}>Assigned to staff</div>
+          <div className="stat-number" style={{ marginTop: 12, color: '#2dd4bf' }}>{stats.in_progress}</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 4 }}>Assigned tickets</div>
         </div>
 
-        <div className="stat-card" style={{ '--glow-color': 'rgba(16, 185, 129, 0.2)' }}>
+        <div className="stat-card">
           <div className="flex justify-between items-center">
             <div className="stat-label">Resolved</div>
-            <div className="stat-icon" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#34d399' }}>
-              <CheckCircle2 size={22} />
+            <div className="stat-icon" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#34d399' }}>
+              <CheckCircle2 size={18} />
             </div>
           </div>
-          <div className="stat-number" style={{ marginTop: 14, color: '#34d399' }}>{stats.resolved}</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 6 }}>Completed tickets</div>
+          <div className="stat-number" style={{ marginTop: 12, color: '#34d399' }}>{stats.resolved}</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 4 }}>Completed tickets</div>
         </div>
       </div>
 
       {/* Recent Activity List */}
-      <div className="glass-card" style={{ padding: '28px 30px' }}>
-        <div className="flex justify-between items-center" style={{ marginBottom: 20 }}>
+      <div className="glass-card" style={{ padding: '24px 26px' }}>
+        <div className="flex justify-between items-center" style={{ marginBottom: 16 }}>
           <div>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#f8fafc' }}>Recent Activity Feed</h2>
-            <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Latest submissions categorized by the pipeline</p>
+            <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#f9fafb' }}>Recent Activity Feed</h2>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Latest submissions processed by the pipeline</p>
           </div>
           <Link to="/admin/complaints" className="btn btn-ghost btn-sm" style={{ gap: 6 }}>
-            <span>View All</span> <ArrowRight size={14} />
+            <span>View All</span> <ArrowRight size={13} />
           </Link>
         </div>
         
@@ -132,30 +130,30 @@ export function AdminDashboard() {
             <p>No student grievances have been registered in the system yet.</p>
           </div>
         ) : (
-          <div className="flex-col gap-3">
+          <div className="flex-col gap-2">
             {recent.map(c => (
               <Link 
                 key={c.id} 
                 to={`/complaints/${c.id}`} 
                 className="interactive-card flex items-center justify-between" 
                 style={{ 
-                  padding: '16px 20px', 
-                  background: 'rgba(255, 255, 255, 0.02)', 
+                  padding: '14px 18px', 
+                  background: '#14161b', 
                   borderRadius: 'var(--radius-md)', 
-                  border: '1px solid var(--border-light)',
-                  borderLeft: c.priority === 'Critical' ? '4px solid #ef4444' : c.priority === 'High' ? '4px solid #f59e0b' : '1px solid var(--border-light)'
+                  border: '1px solid var(--border)',
+                  borderLeft: c.priority === 'Critical' ? '3px solid #ef4444' : c.priority === 'High' ? '3px solid #f59e0b' : '1px solid var(--border)'
                 }}
               >
-                <div style={{ flex: 1, minWidth: 0, marginRight: 20 }}>
-                  <div style={{ fontWeight: 600, fontSize: '0.98rem', marginBottom: 4, color: '#f8fafc' }} className="truncate">
+                <div style={{ flex: 1, minWidth: 0, marginRight: 16 }}>
+                  <div style={{ fontWeight: 600, fontSize: '0.94rem', marginBottom: 3, color: '#f3f4f6' }} className="truncate">
                     {c.title}
                   </div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-                    <span style={{ fontFamily: 'monospace', color: '#c7d2fe' }}>#{c.complaintId}</span>
+                  <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}>
+                    <span style={{ fontFamily: 'monospace', color: '#9ca3af' }}>#{c.complaintId}</span>
                     <span>•</span>
-                    <span style={{ color: '#94a3b8' }}>{c.category}</span>
+                    <span style={{ color: '#d1d5db' }}>{c.category}</span>
                     <span>•</span>
-                    <span>By: <strong style={{ color: '#cbd5e1' }}>{c.studentName || 'Student'}</strong></span>
+                    <span>By: <strong style={{ color: '#f3f4f6' }}>{c.studentName || 'Student'}</strong></span>
                   </div>
                 </div>
 

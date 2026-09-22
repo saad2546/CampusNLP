@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Sparkles, ArrowRight, ShieldCheck, GraduationCap } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 export function Register() {
   const [name, setName] = useState('');
@@ -29,24 +29,24 @@ export function Register() {
 
   return (
     <div className="auth-bg">
-      <div className="auth-card glass-card animate-fade-in-up">
+      <div className="auth-card animate-fade-in-up">
         {/* Brand */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
           <div style={{
-            width: 38,
-            height: 38,
-            borderRadius: 10,
-            background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+            width: 34,
+            height: 34,
+            borderRadius: 8,
+            background: '#10b981',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 4px 15px rgba(99, 102, 241, 0.4)',
+            color: '#072418',
           }}>
-            <Sparkles size={20} color="#fff" />
+            <Sparkles size={18} strokeWidth={2.5} />
           </div>
           <div>
-            <div style={{ fontSize: '1.15rem', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1 }} className="gradient-text">
-              APSIT NLP
+            <div style={{ fontSize: '1.05rem', fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#f3f4f6' }}>
+              APSIT Portal
             </div>
             <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
               Complaint Analyzer
@@ -55,7 +55,7 @@ export function Register() {
         </div>
 
         <div className="auth-title">Create Account</div>
-        <div className="auth-tagline">Join APSIT Grievance portal for student support or admin triage.</div>
+        <div className="auth-tagline">Register for student grievance filing or faculty admin role.</div>
         
         {error && <div className="alert alert-error" style={{ marginBottom: 20 }}>{error}</div>}
 
@@ -100,21 +100,21 @@ export function Register() {
           <div className="form-group">
             <label className="form-label">Account Role</label>
             <select className="form-select" value={role} onChange={e => setRole(e.target.value)}>
-              <option value="student">🎓 Student Account</option>
-              <option value="admin">🛡️ Administrator / Faculty Account</option>
+              <option value="student">Student Account</option>
+              <option value="admin">Administrator / Faculty Account</option>
             </select>
           </div>
 
-          <button type="submit" className="btn btn-primary w-full" disabled={loading} style={{ marginTop: 10, padding: '12px' }}>
+          <button type="submit" className="btn btn-primary w-full" disabled={loading} style={{ marginTop: 8, padding: '11px' }}>
             {loading ? (
               <>
-                <span className="spinner" style={{ width: 16, height: 16, borderWidth: 2 }} />
+                <span className="spinner" style={{ width: 15, height: 15, borderWidth: 2 }} />
                 <span>Creating Account...</span>
               </>
             ) : (
               <>
                 <span>Register Account</span>
-                <ArrowRight size={16} />
+                <ArrowRight size={15} />
               </>
             )}
           </button>

@@ -4,7 +4,7 @@ import { getComplaint, withdrawComplaint, updateStatus, respondComplaint, assign
 import { StatusBadge, PriorityBadge, SentimentBadge } from '../components/Badges';
 import { useAuth } from '../context/AuthContext';
 import { 
-  Trash2, Send, Save, ArrowLeft, Brain, Cpu, Tag, Sparkles, 
+  Trash2, Send, Save, ArrowLeft, Brain, Cpu, Tag, 
   Clock, AlertTriangle, Building, User, CheckCircle2 
 } from 'lucide-react';
 
@@ -73,59 +73,59 @@ export function ComplaintDetails() {
   return (
     <div className="animate-fade-in" style={{ paddingBottom: 50 }}>
       {/* Top back navigation */}
-      <Link to={backLink} className="btn btn-ghost btn-sm" style={{ marginBottom: 20, display: 'inline-flex', gap: 6 }}>
-        <ArrowLeft size={16} /> Back to list
+      <Link to={backLink} className="btn btn-ghost btn-sm" style={{ marginBottom: 18, display: 'inline-flex', gap: 6 }}>
+        <ArrowLeft size={15} /> Back to list
       </Link>
 
       {/* Header Banner */}
-      <div className="flex justify-between items-start" style={{ marginBottom: 26, flexWrap: 'wrap', gap: 16 }}>
+      <div className="flex justify-between items-start" style={{ marginBottom: 24, flexWrap: 'wrap', gap: 14 }}>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
             <span style={{ 
               fontFamily: 'monospace', 
-              fontSize: '0.85rem', 
-              background: 'rgba(99, 102, 241, 0.15)', 
-              color: '#c7d2fe', 
-              padding: '3px 10px', 
-              borderRadius: 6,
-              border: '1px solid rgba(99, 102, 241, 0.3)'
+              fontSize: '0.8rem', 
+              background: '#232731', 
+              color: '#cbd5e1', 
+              padding: '2px 8px', 
+              borderRadius: 4,
+              border: '1px solid var(--border)'
             }}>
               #{complaint.complaintId}
             </span>
-            <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+            <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
               Submitted on {new Date(complaint.createdAt).toLocaleString()}
             </span>
           </div>
-          <h1 className="page-title" style={{ fontSize: '1.85rem' }}>{complaint.title}</h1>
+          <h1 className="page-title" style={{ fontSize: '1.75rem' }}>{complaint.title}</h1>
         </div>
         <StatusBadge status={complaint.status} />
       </div>
 
       {/* Main Grid */}
-      <div className="grid" style={{ gridTemplateColumns: 'minmax(0, 2fr) minmax(300px, 1fr)', gap: 28, alignItems: 'start' }}>
+      <div className="grid" style={{ gridTemplateColumns: 'minmax(0, 2fr) minmax(280px, 1fr)', gap: 24, alignItems: 'start' }}>
         
         {/* Left Column - Complaint Content & Updates */}
-        <div className="flex-col gap-6">
+        <div className="flex-col gap-5">
           {/* Main Card */}
-          <div className="glass-card" style={{ padding: '28px 30px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
+          <div className="glass-card" style={{ padding: '24px 26px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
               <div style={{
-                width: 38,
-                height: 38,
+                width: 34,
+                height: 34,
                 borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.05)',
+                background: '#232731',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 border: '1px solid var(--border)'
               }}>
-                <User size={18} color="#94a3b8" />
+                <User size={16} color="#9ca3af" />
               </div>
               <div>
-                <div style={{ fontWeight: 600, fontSize: '0.95rem', color: '#f8fafc' }}>
+                <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#f3f4f6' }}>
                   {complaint.studentName || 'Student'}
                 </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                   Registered Grievance
                 </div>
               </div>
@@ -134,10 +134,10 @@ export function ComplaintDetails() {
             <div style={{ 
               whiteSpace: 'pre-wrap', 
               color: 'var(--text-primary)', 
-              lineHeight: 1.7,
-              fontSize: '0.96rem',
-              background: 'rgba(0, 0, 0, 0.2)',
-              padding: '18px 20px',
+              lineHeight: 1.6,
+              fontSize: '0.92rem',
+              background: '#14161b',
+              padding: '16px 18px',
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border-light)'
             }}>
@@ -145,33 +145,33 @@ export function ComplaintDetails() {
             </div>
 
             {/* Department info */}
-            <div style={{ marginTop: 20, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                <Building size={16} color="#818cf8" />
-                <span>Department: <strong style={{ color: '#fff' }}>{complaint.assignedDepartment || complaint.category || 'General'}</strong></span>
+            <div style={{ marginTop: 18, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.84rem', color: 'var(--text-secondary)' }}>
+                <Building size={15} color="#34d399" />
+                <span>Department: <strong style={{ color: '#f3f4f6' }}>{complaint.assignedDepartment || complaint.category || 'General'}</strong></span>
               </div>
             </div>
           </div>
 
           {/* Admin Response Card */}
-          <div className="glass-card" style={{ padding: '24px 28px' }}>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
-              <CheckCircle2 size={18} color="#10b981" /> Official Response
+          <div className="glass-card" style={{ padding: '22px 24px' }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 600, marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8, color: '#f3f4f6' }}>
+              <CheckCircle2 size={17} color="#10b981" /> Official Response
             </h3>
             {complaint.adminResponse ? (
               <div style={{ 
-                padding: '18px 20px', 
-                background: 'rgba(99, 102, 241, 0.08)', 
+                padding: '16px 18px', 
+                background: '#14161b', 
                 borderRadius: 'var(--radius-md)', 
-                borderLeft: '4px solid var(--primary-light)',
-                border: '1px solid rgba(99, 102, 241, 0.2)',
-                color: '#e2e8f0',
+                borderLeft: '3px solid #10b981',
+                border: '1px solid var(--border)',
+                color: '#e5e7eb',
                 lineHeight: 1.6
               }}>
                 {complaint.adminResponse}
               </div>
             ) : (
-              <div style={{ color: 'var(--text-muted)', fontStyle: 'italic', padding: '12px 0' }}>
+              <div style={{ color: 'var(--text-muted)', fontStyle: 'italic', padding: '8px 0', fontSize: '0.88rem' }}>
                 No official response provided yet. The concerned department has been notified.
               </div>
             )}
@@ -179,13 +179,12 @@ export function ComplaintDetails() {
 
           {/* Admin Controls (Only visible to admin) */}
           {role === 'admin' && (
-            <div className="glass-card" style={{ padding: '26px 30px', border: '1px solid rgba(168, 85, 247, 0.35)', background: 'rgba(24, 20, 36, 0.85)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 18 }}>
-                <Sparkles size={18} color="#c084fc" />
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#f3e8ff' }}>Admin Action Panel</h3>
-              </div>
+            <div className="glass-card" style={{ padding: '24px 26px', border: '1px solid #374151' }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 600, color: '#f3f4f6', marginBottom: 16 }}>
+                Admin Action Panel
+              </h3>
 
-              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 18, marginBottom: 18 }}>
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16, marginBottom: 16 }}>
                 <div className="form-group">
                   <label className="form-label">Update Status</label>
                   <select className="form-select" value={status} onChange={e => setStatus(e.target.value)}>
@@ -209,19 +208,19 @@ export function ComplaintDetails() {
                 </div>
               </div>
 
-              <div className="form-group" style={{ marginBottom: 20 }}>
+              <div className="form-group" style={{ marginBottom: 18 }}>
                 <label className="form-label">Response to Student</label>
                 <textarea 
                   className="form-textarea" 
                   placeholder="Type an update or resolution note for the student..."
-                  style={{ minHeight: 90 }} 
+                  style={{ minHeight: 80 }} 
                   value={adminResponse} 
                   onChange={e => setAdminResponse(e.target.value)} 
                 />
               </div>
 
               <button className="btn btn-primary" onClick={handleAdminUpdate} disabled={saving} style={{ gap: 8 }}>
-                <Save size={16} /> {saving ? 'Saving Changes...' : 'Save & Publish Update'}
+                <Save size={15} /> {saving ? 'Saving...' : 'Save & Publish Update'}
               </button>
             </div>
           )}
@@ -229,55 +228,55 @@ export function ComplaintDetails() {
 
         {/* Right Column - NLP Intelligence Report */}
         <div className="flex-col gap-4">
-          <div className="glass-card" style={{ padding: '24px 22px', border: '1px solid rgba(99, 102, 241, 0.25)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 18, borderBottom: '1px solid var(--border)', paddingBottom: 12 }}>
-              <Brain size={18} color="#818cf8" />
-              <h3 style={{ fontSize: '0.88rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: '#c7d2fe', fontWeight: 700 }}>
-                NLP Intelligence Analysis
+          <div className="glass-card" style={{ padding: '20px 22px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16, borderBottom: '1px solid var(--border)', paddingBottom: 10 }}>
+              <Brain size={16} color="#34d399" />
+              <h3 style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: '#9ca3af', fontWeight: 700 }}>
+                NLP Analysis
               </h3>
             </div>
             
-            <div className="flex-col gap-5">
+            <div className="flex-col gap-4">
               {/* Category */}
               <div>
-                <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600, letterSpacing: '0.04em', marginBottom: 4 }}>
-                  Classified Category
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600, letterSpacing: '0.04em', marginBottom: 2 }}>
+                  Category
                 </div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: '#fff' }}>{complaint.category}</div>
-                <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)' }}>{complaint.subcategory}</div>
+                <div style={{ fontWeight: 700, fontSize: '0.98rem', color: '#f3f4f6' }}>{complaint.category}</div>
+                <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>{complaint.subcategory}</div>
               </div>
 
               {/* Priority & Sentiment */}
               <div>
-                <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600, letterSpacing: '0.04em', marginBottom: 8 }}>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600, letterSpacing: '0.04em', marginBottom: 6 }}>
                   Urgency & Sentiment
                 </div>
-                <div className="flex" style={{ gap: 8, flexWrap: 'wrap' }}>
+                <div className="flex" style={{ gap: 6, flexWrap: 'wrap' }}>
                   <PriorityBadge priority={complaint.priority} />
                   <SentimentBadge sentiment={complaint.sentiment} />
                 </div>
               </div>
 
               {complaint.is_duplicate && (
-                <div className="alert alert-warning" style={{ fontSize: '0.78rem', padding: '10px 12px', borderRadius: 8 }}>
-                  <AlertTriangle size={15} style={{ flexShrink: 0 }} />
+                <div className="alert alert-warning" style={{ fontSize: '0.76rem', padding: '8px 10px', borderRadius: 6 }}>
+                  <AlertTriangle size={14} style={{ flexShrink: 0 }} />
                   <span>Potential duplicate detected via TF-IDF cosine similarity.</span>
                 </div>
               )}
 
-              {/* AI Summary */}
-              <div style={{ background: 'rgba(99, 102, 241, 0.06)', padding: '12px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
-                <div style={{ fontSize: '0.74rem', color: '#a5b4fc', textTransform: 'uppercase', fontWeight: 700, marginBottom: 6, display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <Cpu size={13} /> Extractive Summary
+              {/* Summary */}
+              <div style={{ background: '#14161b', padding: '10px 12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>
+                <div style={{ fontSize: '0.72rem', color: '#34d399', textTransform: 'uppercase', fontWeight: 700, marginBottom: 4, display: 'flex', alignItems: 'center', gap: 5 }}>
+                  <Cpu size={12} /> Extractive Summary
                 </div>
-                <div style={{ fontSize: '0.85rem', color: '#e2e8f0', fontStyle: 'italic', lineHeight: 1.5 }}>
+                <div style={{ fontSize: '0.82rem', color: '#d1d5db', fontStyle: 'italic', lineHeight: 1.5 }}>
                   "{complaint.summary || 'Summary unavailable'}"
                 </div>
               </div>
 
               {/* Keywords */}
               <div>
-                <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600, letterSpacing: '0.04em', marginBottom: 8 }}>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600, letterSpacing: '0.04em', marginBottom: 6 }}>
                   Extracted Keywords
                 </div>
                 <div className="flex" style={{ flexWrap: 'wrap', gap: 6 }}>
@@ -294,7 +293,7 @@ export function ComplaintDetails() {
               {/* Entities */}
               {complaint.entities?.length > 0 && (
                 <div>
-                  <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600, letterSpacing: '0.04em', marginBottom: 8 }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600, letterSpacing: '0.04em', marginBottom: 6 }}>
                     Recognized Entities
                   </div>
                   <div className="flex" style={{ flexWrap: 'wrap', gap: 6 }}>
@@ -313,8 +312,8 @@ export function ComplaintDetails() {
 
           {/* Student action to withdraw */}
           {role === 'student' && complaint.status === 'Pending' && (
-            <button className="btn btn-danger w-full justify-center" onClick={handleWithdraw} style={{ gap: 8, padding: '12px' }}>
-              <Trash2 size={16} /> Withdraw This Complaint
+            <button className="btn btn-danger w-full justify-center" onClick={handleWithdraw} style={{ gap: 8, padding: '10px' }}>
+              <Trash2 size={15} /> Withdraw Complaint
             </button>
           )}
         </div>
